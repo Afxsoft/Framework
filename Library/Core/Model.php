@@ -11,6 +11,11 @@ abstract class Model
     protected $table;
     protected $primary;
 
+    /**
+     * Model constructor.
+     *
+     * @param PDO $cx
+     */
     public function __construct($cx)
     {
         $this->db = $cx;
@@ -20,7 +25,7 @@ abstract class Model
      * findById() return all fields selected of an element id
      * @param int $value_primary
      * @param string $fields
-     * @return array
+     * @return array|boolean
      */
     public function findById($value_primary, $fields = '*')
     {
@@ -97,7 +102,7 @@ abstract class Model
 
     /**
      * delete() allows you to delete an occurrence of the table with his id
-     * @param type $value_primary
+     * @param string $value_primary
      * @return boolean
      */
     public function delete($value_primary)
@@ -112,7 +117,7 @@ abstract class Model
 
     /**
      * delete() allows you to delete all occurrences
-     * @param type $where
+     * @param string $where
      * @return boolean
      */
     public function massDelete($where)
@@ -124,6 +129,4 @@ abstract class Model
         }
         return false;
     }
-
-
 }
