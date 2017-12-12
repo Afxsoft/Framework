@@ -37,7 +37,7 @@ class Connexion
             $this->cx = new PDO("mysql:host=" . $host . ";dbname=" . $dbname, $user, $password);
             $this->cx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
             $this->cx->exec("SET CHARACTER SET $charset");
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die($e);
         }
     }
