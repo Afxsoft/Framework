@@ -19,6 +19,7 @@ class Router
      * dispatchPage($url).
      * This method allows the manage link
      * @param array $url
+     * @param string $type
      */
     public function dispatchPage($url, $type = 'front')
     {
@@ -83,12 +84,11 @@ class Router
     /**
      * getActionName($act).
      * This method allows retrieve the name of the action
-     * @param type $act
-     * @return type
+     * @param string $act
+     * @return string
      */
     private function getActionName($act)
     {
         return strtolower($act) . "Action";
     }
-
 }
