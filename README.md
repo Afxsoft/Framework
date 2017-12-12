@@ -42,4 +42,3 @@ How to
 
 3 - Take example database Bdd.sql.
 
-*enjoy or not :p*
