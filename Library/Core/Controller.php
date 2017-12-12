@@ -9,15 +9,19 @@ class Controller
 {
 
     protected $source_root;
+
     protected $source_link;
+
     private $layout = "default";
+
     private $responseHeader = "text/html";
-    private $vars = array(
-        "viewSiteName" => "",
-        "viewTile" => "",
-        "viewDescription" => "",
-        "alert" => "",
-    );
+
+    private $vars = [
+      "viewSiteName" => "",
+      "viewTile" => "",
+      "viewDescription" => "",
+      "alert" => "",
+    ];
 
     public function __construct()
     {
@@ -26,34 +30,32 @@ class Controller
     /**
      * renderView($i).
      * This method displays the Result of the view of a controller
+     *
      * @param array $i
      */
     public function renderView($i)
     {
         // @TODO Make a clean array to get all vars.
+        $controller = null;
+        $action = null;
         extract($i);
 
-        $pathViews = $this->source_root . "Views/Controllers/" . str_replace(
-            $this->source_link,
-                "",
-                $controller,
-            ) . "/" . str_replace("Action", "", $action) . ".php";
-        if (file_exists($pathViews)) {
+        $pathViews = $this->source_root . "Views/Controllers/" .
+          str_replace($this->source_link, "", $controller) .
+          "/" . str_replace("Action", "", $action) . ".php";
 
+        if (file_exists($pathViews)) {
             header("Content-type: " . $this->responseHeader . ";charset=UTF-8");
             extract($this->vars);
 
             ob_start();
             include_once $pathViews;
-            $viewContent = ob_get_clean();
-
-            ob_start();
-
-
-            include_once $this->source_root . "Views/Layouts/" . $this->get_layout() . ".tpl.php";
-            $finaleRender = ob_get_clean();
-
-            echo $finaleRender;
+            if ($viewContent = ob_get_clean()) {
+                ob_start();
+                include_once $this->source_root . "Views/Layouts/" . $this->getLayout() . ".tpl.php";
+                $finaleRender = ob_get_clean();
+                echo $finaleRender;
+            }
         } elseif (!empty($_SERVER['HTTP_REFERER'])) {
             header("location :" . $_SERVER['HTTP_REFERER']);
             die();
@@ -64,50 +66,54 @@ class Controller
     }
 
     /**
-     * get_layout()
+     * getLayout()
      * This method allows retrieve the layout
+     *
      * @return string
      */
-    protected function get_layout()
+    protected function getLayout()
     {
         return $this->layout;
     }
 
     /**
-     * set_responseHeader($value)
+     * setResponseHeader($value)
      * This method adds the required headers
-     * @param type $value
+     *
+     * @param string $value
      */
-    protected function set_responseHeader($value)
+    protected function setResponseHeader($value)
     {
-        $possibility = array(
-            "txt" => "text/plain",
-            "html" => "text/html",
-            "css" => "text/css",
-            "js" => "application/javascript",
-            "json" => "application/json",
-            "xml" => "application/xml",
-        );
+        $possibility = [
+          "txt" => "text/plain",
+          "html" => "text/html",
+          "css" => "text/css",
+          "js" => "application/javascript",
+          "json" => "application/json",
+          "xml" => "application/xml",
+        ];
         if (array_key_exists(strtolower($value), $possibility)) {
             $this->responseHeader = $possibility[$value];
         }
     }
 
     /**
-     * add_data_view($data)
+     * addDataView($data)
      * This method allows to add variables to the view
+     *
      * @param array $data
      */
-    public function add_data_view($data)
+    public function addDataView($data)
     {
         $this->vars = array_merge($this->vars, $data);
     }
 
     /**
-     * Function set_layout() put a layout.
-     * @param type $layout
+     * Function setLayout() put a layout.
+     *
+     * @param string $layout
      */
-    public function set_layout($layout)
+    public function setLayout($layout)
     {
         $layout_file_path = APP_ROOT . "Views/Layouts/" . $layout . ".tpl.php";
         if ((file_exists($layout_file_path))) {
@@ -117,5 +123,4 @@ class Controller
         }
         $this->layout = $layout;
     }
-
 }
