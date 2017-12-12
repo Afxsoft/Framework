@@ -16,7 +16,7 @@ class Logout extends MainController
     {
         unset($_SESSION['User']);
 
-        $this->add_data_view(array("viewTitle" => "Logout"));
+        $this->addDataView(array("viewTitle" => "Logout"));
         header("location:/");
     }
 

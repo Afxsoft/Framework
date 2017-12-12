@@ -31,7 +31,7 @@ class Content extends MainController
 
             }
             // @TODO Make this file dynamical
-            $this->add_data_view(array(
+            $this->addDataView(array(
                 "viewTitle" => $content[0]->title,
                 "viewSiteName" => "Sitruc",
                 "calendar" => $calendar,

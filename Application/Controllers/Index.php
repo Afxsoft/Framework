@@ -14,7 +14,7 @@ class Index extends MainController
     // @TODO put dynamical stuff
     public function indexAction()
     {
-        $this->add_data_view(array("viewTitle" => "Home", "viewSiteName" => "SITRUC", "front" => true));
+        $this->addDataView(array("viewTitle" => "Home", "viewSiteName" => "SITRUC", "front" => true));
     }
 
 }

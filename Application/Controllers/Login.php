@@ -34,8 +34,8 @@ class Login extends MainController
             }
         }
 
-        $this->add_data_view(array("viewTitle" => "Login", "alert" => (!empty($alert)) ? $alert : ''));
-        $this->set_layout('login');
+        $this->addDataView(array("viewTitle" => "Login", "alert" => (!empty($alert)) ? $alert : ''));
+        $this->setLayout('login');
     }
 
 }

@@ -18,7 +18,7 @@ class Index extends MainController
         $cx = $connexion->getCx();
         $modelUser = new \Application\Models\User($cx);
         $user = $modelUser->findById($_SESSION['User']['id']);
-        $this->add_data_view(array("viewTitle" => "Admin", "user" => $user[0]));
+        $this->addDataView(array("viewTitle" => "Admin", "user" => $user[0]));
     }
 
 }

@@ -34,5 +34,4 @@ class Alert
         $output = "<div class='msg-alert alert $class' role='alert'><strong>$msg</strong></div>";
         return $output;
     }
-
 }

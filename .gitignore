@@ -1,2 +1,4 @@
 #Phpstorm generate file
 .idea/
+#Settings files
+Application/Configs/Settings.php
